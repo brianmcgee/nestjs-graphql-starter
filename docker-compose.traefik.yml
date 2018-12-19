@@ -1,0 +1,29 @@
+version: '3.5'
+
+services:
+
+  adminer:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.default.protocol=http"
+      - "traefik.backend=adminer"
+      - "traefik.frontend.rule=Host:adminer.${BASE_DOMAIN}"
+      - "traefik.port=80"
+
+  api:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.default.protocol=http"
+      - "traefik.backend=api"
+      - "traefik.frontend.rule=Host:api.${BASE_DOMAIN}"
+      - "traefik.port=3000"
+
+  traefik:
+    image: bluerose/docker-traefik:1.0.1
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: on-failure

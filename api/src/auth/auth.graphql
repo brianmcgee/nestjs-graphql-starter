@@ -1,0 +1,10 @@
+type Mutation {
+    authenticateWithEmail(email: String!, password: String!): AccessToken
+    resetPassword(password: String!): Boolean
+}
+
+type AccessToken {
+    id: ID
+    expiresIn: Int
+    user: User
+}

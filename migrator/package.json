@@ -1,0 +1,18 @@
+{
+  "name": "beta-cms-migrator",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "start": "yarn install && yarn migrate up && yarn migrate up:test",
+    "migrate": "db-migrate",
+    "migrate:redo:test": "yarn install && yarn migrate reset:test && yarn migrate up:test",
+    "migrate:redo": "yarn migrate reset:test && yarn migrate reset && yarn migrate up && yarn migrate up:test"
+  },
+  "dependencies": {
+    "db-migrate": "~0.10.0-beta.24",
+    "db-migrate-pg": "~0.4.0"
+  }
+}

@@ -1,0 +1,27 @@
+type Query {
+    users(offset: Int, limit: Int, q: String): [User]!
+    usersCount(offset: Int, limit: Int, q: String): Int!
+    user(id: ID!): User
+}
+
+type Mutation {
+    createUser(user: UpsertUser): User!
+    updateUserById(id: ID!, user: UpsertUser): User!
+    deleteUserById(id: ID!): Boolean
+}
+
+type User {
+    id: ID
+    email: String
+    firstName: String
+    familyName: String
+    createdAt: Date
+    updatedAt: Date
+}
+
+input UpsertUser {
+    email: String
+    firstName: String
+    familyName: String
+    password: String
+}

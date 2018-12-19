@@ -1,0 +1,10 @@
+.idea/
+*.iml
+.env
+core
+dist/
+.docker-sync/
+
+node_modules/
+
+swagger.json

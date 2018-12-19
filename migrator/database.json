@@ -1,0 +1,12 @@
+{
+  "defaultEnv": { "ENV": "NODE_ENV" },
+  "development": {
+    "url": { "ENV": "POSTGRES_URL" },
+    "multipleStatements": true
+  },
+  "staging": {
+    "url": { "ENV": "POSTGRES_URL" },
+    "multipleStatements": true
+  },
+  "sql-file" : true
+}

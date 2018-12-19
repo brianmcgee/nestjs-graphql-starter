@@ -1,0 +1,61 @@
+version: '3.5'
+
+services:
+
+  db:
+    image: postgres:10.4
+    environment:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+    restart: on-failure
+
+  adminer:
+    image: clue/adminer
+    depends_on:
+      - db
+    restart: on-failure
+
+  migrator:
+    image: node:10.11.0-alpine
+    depends_on:
+      - db
+    volumes:
+      - ./migrator:/usr/src/app
+    user: node
+    working_dir: /usr/src/app
+    entrypoint: yarn
+    command: start
+    restart: on-failure
+    environment:
+      NODE_ENV:
+      POSTGRES_URL:
+
+  api:
+    build:
+      dockerfile: ./api/Dockerfile
+      context: .
+    depends_on:
+      - db
+    volumes:
+      - ./api:/usr/src/app
+    user: node
+    working_dir: /usr/src/app
+    entrypoint: sh -c "yarn install && yarn run start:dev"
+    networks:
+      default:
+        aliases:
+          - api.beta.cms
+    expose:
+      - "3000"
+    environment:
+      NODE_ENV:
+      POSTGRES_URL:
+      AWS_ENDPOINT:
+      AWS_ACCESS_KEY_ID:
+      AWS_SECRET_ACCESS_KEY:
+      CL_CLOUD_NAME:
+      CL_API_KEY:
+      CL_API_SECRET:
+      VIRTUAL_PORT: 3000
+      GRAPHQL_PLAYGROUND: 'true'
+    restart: on-failure
