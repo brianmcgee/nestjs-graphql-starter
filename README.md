@@ -2,7 +2,7 @@
 
  * [Requirements](#REQUIREMENTS)
  * [Quickstart](#QUICKSTART)
- * [Helper Scripts](#HELPER SCRIPTS)
+ * [Helper Scripts](#HELPER-SCRIPTS)
 
 # REQUIREMENTS
 
